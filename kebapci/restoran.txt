@@ -1,0 +1,38 @@
+create database test;
+use test;
+create table masa(
+masaNo int primary key auto_increment,
+masaAd varchar(50)
+);
+create table adisyon(
+adisyonNo int primary key auto_increment,
+masaNo int,
+bitti bit,
+foreign key(masaNo) references masa(masaNo)
+);
+create table tuketimTip(
+tuketimNo int primary key auto_increment,
+tuketimAd varchar(50)
+);
+create table yemek(
+yemekNo int primary key auto_increment,
+tuketimNo int,
+yemekAd varchar(50),
+fiyat float,
+ foreign key (tuketimNo) references tuketimTip(tuketimNo)
+);
+create table tuketilen(
+tuketilenNo int primary key auto_increment,
+adisyonNo int,
+yemekNo int,
+miktar float,
+aciklama varchar(100),
+ foreign key (adisyonNo) references adisyon(adisyonNo),
+ foreign key (yemekNo) references yemek(yemekNo)
+);
+
+
+insert into tuketimTip(tuketimAd) values('icecek'),('yiyecek');
+insert into yemek(tuketimNo,yemekAd,fiyat) values(1,'fanta 20 cl',3),(1,'fanta 33cl',5),(1,'fanta 50cl',6),(1,'cola 20 cl',3),(1,'cola 33cl',5),(1,'cola 50cl',6),(1,'ayran 20cl',2),(1,'ayran 33cl',3),(1,'ayran 50cl',5),(2,'lahmacun',6),(2,'kiymali',9),(2,'kasarli',8),(2,'kusbasili',12),(2,'sucuklu',10),(2,'adana',15),(2,'urfa',15);
+insert into masa(masaAd) values('A'),('B'),('C'),('D'),('E'),('F'),('G'),('H');
+insert into adisyon(masaNo,bitti) values(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0);
